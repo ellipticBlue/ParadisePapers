@@ -7,7 +7,7 @@ import com.paradise.graph.GraphConfiguration
 import com.paradise.graph.dal.GraphDAL
 import com.paradise.logic.GraphManager.GraphManagerState
 import com.paradise.logic.Protocols.GraphManagerProtocol._
-import com.paradise.model.{GraphEdge, GraphNode, PathCollection, PathRequest}
+import com.paradise.model._
 
 import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success}
@@ -117,6 +117,7 @@ class GraphManager() extends Actor with DbConfiguration {
 
   // Fulfill end-user request to find shortest distance between two graph nodes. This is just a wrapper method
   private def calculateShortestPath(origin: ActorRef, pathRequest: PathRequest): Unit = {
+    val start = System.currentTimeMillis
     graphDal.getShortestPaths(pathRequest.startNodeId, pathRequest.endNodeId) onComplete {
       case Success(res) =>
         origin ! res

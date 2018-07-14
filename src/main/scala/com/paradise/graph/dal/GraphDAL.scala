@@ -1,5 +1,6 @@
 package com.paradise.graph.dal
 
+import com.paradise.graph.algorithms.ShortestPaths
 import com.paradise.graph.{Graph, GraphConfiguration}
 import com.paradise.model._
 import gremlin.scala._
@@ -211,10 +212,16 @@ case class GraphDAL(graphConfiguration: GraphConfiguration)(implicit ec: Executi
   // Find the shortest path(s) joinging two nodes, given the node IDs of the endpoints.
   // Note - The node IDs are expected to correspond to those in the original RDBMS datastore
   def getShortestPaths(startId: Int, endId: Int): Future[PathCollection] = {
-
-    // TODO: Impelement this
-
-    Future.successful(PathCollection(Set()))
+    (getVertexFromId(startId), getVertexFromId(endId)) match {
+      case (Some(sid), Some(eid)) =>
+        ShortestPaths.getShortestPaths(sid, eid, getAttachedEdgesAndVertices).map { i =>
+          PathCollection(i.map { j =>
+            Path(j.map(k => PathLink(getGraphNode(k._1), k._2.map(getDBEdge))))
+          })
+        }
+      case _ =>
+        Future.successful(PathCollection(Set()))
+    }
   }
 }
 

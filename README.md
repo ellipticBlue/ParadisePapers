@@ -10,6 +10,7 @@ Reading through the problem, the code embodies the following assumptions:
 
 # Requirements
 1. MySQL and Neo4J servers running, with dataset available via the MySQL server (connection parameters can be set in the application.conf)
+2. When working with large graphs, such as those in the provided dataset, the JVM heap size may need adjustment. Testing was carried out on the provided dataset using a 10 gigabyte heap.
 
 # API
 Running the application will create a REST API on localhost accessible via port 8080. The following commands can be supplied
@@ -22,3 +23,226 @@ Running the application will create a REST API on localhost accessible via port 
   "endNodeId": 654321
 }
 ```
+Below is an example of return JSON (note each path contains alternating vertex-edge entries with the top of the 
+array corresponding to the starting vertex):
+```
+{
+  "paths": [{
+    "path": [{
+      "vertex": {
+        "jurisdictionDescription": "mn",
+        "jurisdiction": "qr",
+        "name": "kl",
+        "validUntil": "bc",
+        "serviceProvider": "op",
+        "incorporationDate": "uv",
+        "countries": "ef",
+        "companyType": "cd",
+        "closedDate": "st",
+        "labels": "ab",
+        "note": "ef",
+        "countryCode": "cd",
+        "status": "ab",
+        "nodeType": "yz",
+        "address": "ij",
+        "nodeId": 2,
+        "ibcRUC": "wx",
+        "nodeLabel": "entity",
+        "sourceId": "gh"
+      },
+      "connectingEdge": {
+        "index": 1,
+        "relationType": "foo",
+        "nodeOne": 2,
+        "nodeTwo": 1
+      }
+    }, {
+      "vertex": {
+        "jurisdictionDescription": "mn",
+        "jurisdiction": "qr",
+        "name": "kl",
+        "validUntil": "bc",
+        "serviceProvider": "op",
+        "incorporationDate": "uv",
+        "countries": "ef",
+        "companyType": "cd",
+        "closedDate": "st",
+        "labels": "ab",
+        "note": "ef",
+        "countryCode": "cd",
+        "status": "ab",
+        "nodeType": "yz",
+        "address": "ij",
+        "nodeId": 1,
+        "ibcRUC": "wx",
+        "nodeLabel": "address",
+        "sourceId": "gh"
+      },
+      "connectingEdge": {
+        "index": 3,
+        "relationType": "baz",
+        "nodeOne": 4,
+        "nodeTwo": 1
+      }
+    }, {
+      "vertex": {
+        "jurisdictionDescription": "mn",
+        "jurisdiction": "qr",
+        "name": "kl",
+        "validUntil": "bc",
+        "serviceProvider": "op",
+        "incorporationDate": "uv",
+        "countries": "ef",
+        "companyType": "cd",
+        "closedDate": "st",
+        "labels": "ab",
+        "note": "ef",
+        "countryCode": "cd",
+        "status": "ab",
+        "nodeType": "yz",
+        "address": "ij",
+        "nodeId": 4,
+        "ibcRUC": "wx",
+        "nodeLabel": "officer",
+        "sourceId": "gh"
+      },
+      "connectingEdge": {
+        "index": 7,
+        "relationType": "bar",
+        "nodeOne": 4,
+        "nodeTwo": 7
+      }
+    }, {
+      "vertex": {
+        "jurisdictionDescription": "mn",
+        "jurisdiction": "qr",
+        "name": "kl",
+        "validUntil": "bc",
+        "serviceProvider": "op",
+        "incorporationDate": "uv",
+        "countries": "ef",
+        "companyType": "cd",
+        "closedDate": "st",
+        "labels": "ab",
+        "note": "ef",
+        "countryCode": "cd",
+        "status": "ab",
+        "nodeType": "yz",
+        "address": "ij",
+        "nodeId": 7,
+        "ibcRUC": "wx",
+        "nodeLabel": "officer",
+        "sourceId": "gh"
+      }
+    }]
+  }, {
+    "path": [{
+      "vertex": {
+        "jurisdictionDescription": "mn",
+        "jurisdiction": "qr",
+        "name": "kl",
+        "validUntil": "bc",
+        "serviceProvider": "op",
+        "incorporationDate": "uv",
+        "countries": "ef",
+        "companyType": "cd",
+        "closedDate": "st",
+        "labels": "ab",
+        "note": "ef",
+        "countryCode": "cd",
+        "status": "ab",
+        "nodeType": "yz",
+        "address": "ij",
+        "nodeId": 2,
+        "ibcRUC": "wx",
+        "nodeLabel": "entity",
+        "sourceId": "gh"
+      },
+      "connectingEdge": {
+        "index": 1,
+        "relationType": "foo",
+        "nodeOne": 2,
+        "nodeTwo": 1
+      }
+    }, {
+      "vertex": {
+        "jurisdictionDescription": "mn",
+        "jurisdiction": "qr",
+        "name": "kl",
+        "validUntil": "bc",
+        "serviceProvider": "op",
+        "incorporationDate": "uv",
+        "countries": "ef",
+        "companyType": "cd",
+        "closedDate": "st",
+        "labels": "ab",
+        "note": "ef",
+        "countryCode": "cd",
+        "status": "ab",
+        "nodeType": "yz",
+        "address": "ij",
+        "nodeId": 1,
+        "ibcRUC": "wx",
+        "nodeLabel": "address",
+        "sourceId": "gh"
+      },
+      "connectingEdge": {
+        "index": 5,
+        "relationType": "foo",
+        "nodeOne": 1,
+        "nodeTwo": 6
+      }
+    }, {
+      "vertex": {
+        "jurisdictionDescription": "mn",
+        "jurisdiction": "qr",
+        "name": "kl",
+        "validUntil": "bc",
+        "serviceProvider": "op",
+        "incorporationDate": "uv",
+        "countries": "ef",
+        "companyType": "cd",
+        "closedDate": "st",
+        "labels": "ab",
+        "note": "ef",
+        "countryCode": "cd",
+        "status": "ab",
+        "nodeType": "yz",
+        "address": "ij",
+        "nodeId": 6,
+        "ibcRUC": "wx",
+        "nodeLabel": "address",
+        "sourceId": "gh"
+      },
+      "connectingEdge": {
+        "index": 8,
+        "relationType": "baz",
+        "nodeOne": 7,
+        "nodeTwo": 6
+      }
+    }, {
+      "vertex": {
+        "jurisdictionDescription": "mn",
+        "jurisdiction": "qr",
+        "name": "kl",
+        "validUntil": "bc",
+        "serviceProvider": "op",
+        "incorporationDate": "uv",
+        "countries": "ef",
+        "companyType": "cd",
+        "closedDate": "st",
+        "labels": "ab",
+        "note": "ef",
+        "countryCode": "cd",
+        "status": "ab",
+        "nodeType": "yz",
+        "address": "ij",
+        "nodeId": 7,
+        "ibcRUC": "wx",
+        "nodeLabel": "officer",
+        "sourceId": "gh"
+      }
+    }]
+  }]
+```
+

@@ -95,5 +95,17 @@ class GraphDALSpec extends FlatSpec with Matchers {
       (edge7, node7),
       (edge6, node5))
   }
+
+  "Graph DAL" should "find all shortest paths between two connected nodes in graph" in {
+    Await.result(graphDal.getShortestPaths(2, 7), Duration.Inf) shouldBe shortestPathCollectionSolution
+  }
+
+  "Graph DAL" should "return empty path collection when finding path between two disconnected nodes" in {
+    Await.result(graphDal.getShortestPaths(2, 9), Duration.Inf) shouldBe emptyPathCollection
+  }
+
+  "Graph DAL" should "return single node path collection" in {
+    Await.result(graphDal.getShortestPaths(8, 8), Duration.Inf) shouldBe singleNodePathCollectionSoltuion
+  }
 }
 
