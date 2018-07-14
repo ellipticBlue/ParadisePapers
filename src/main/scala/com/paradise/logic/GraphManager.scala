@@ -117,7 +117,6 @@ class GraphManager() extends Actor with DbConfiguration {
 
   // Fulfill end-user request to find shortest distance between two graph nodes. This is just a wrapper method
   private def calculateShortestPath(origin: ActorRef, pathRequest: PathRequest): Unit = {
-    val start = System.currentTimeMillis
     graphDal.getShortestPaths(pathRequest.startNodeId, pathRequest.endNodeId) onComplete {
       case Success(res) =>
         origin ! res
