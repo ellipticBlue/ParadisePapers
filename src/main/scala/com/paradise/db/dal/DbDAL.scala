@@ -25,7 +25,7 @@ class DbDAL(val config: DatabaseConfig[JdbcProfile])
 
   // Edge queries
   // ---
-  def getAllEdges: Future[Seq[Edge]] = db.run(edges.result)
+  def getAllEdges: Future[Seq[GraphEdge]] = db.run(edges.result)
 
   // Node queries
   // ---
@@ -39,7 +39,7 @@ class DbDAL(val config: DatabaseConfig[JdbcProfile])
 
   def getAllOthers: Future[Seq[GraphNode]] = db.run(others.result).map(i => i.map(GraphNode("other", _)))
 
-  def closeDb: Unit = db.close()
+  def closeDb(): Unit = db.close()
 
   // For testing - Project only requires read operations to be performed on DB, but some additional methods are needed
   // to make unit tests. The methods below exist solely for this purpose
@@ -67,7 +67,7 @@ class DbDAL(val config: DatabaseConfig[JdbcProfile])
     ))
 
   // Inserts an edge into the edge table
-  def insertEdge(e: Edge): Future[Int] =
+  def insertEdge(e: GraphEdge): Future[Int] =
     db.run(edges += e)
 
   // As all the node tables have the same schema, tests can be made a bit more concise with an operation to write

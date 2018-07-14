@@ -7,7 +7,7 @@ import spray.json._
 
 // This is used to facilitate the serialization/de-serialization between JSON and case classes
 trait ApiJsonSupport extends SprayJsonSupport with DefaultJsonProtocol {
-  implicit val printer = PrettyPrinter
+  implicit val printer: PrettyPrinter.type = PrettyPrinter
 
   implicit lazy val acknowledgeJsonFormat: RootJsonFormat[Acknowledgement] =
     jsonFormat1(Acknowledgement)
@@ -24,8 +24,8 @@ trait ApiJsonSupport extends SprayJsonSupport with DefaultJsonProtocol {
   implicit lazy val pathLinkFormat: RootJsonFormat[PathLink] =
     jsonFormat2(PathLink)
 
-  implicit lazy val edgeFormat: RootJsonFormat[Edge] =
-    jsonFormat4(Edge)
+  implicit lazy val edgeFormat: RootJsonFormat[GraphEdge] =
+    jsonFormat4(GraphEdge)
 
   implicit lazy val nodeFormat: RootJsonFormat[GraphNode] =
     jsonFormat19(GraphNode.apply)

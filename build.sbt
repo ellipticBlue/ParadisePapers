@@ -25,3 +25,11 @@ libraryDependencies ++= Seq(
   "mysql" % "mysql-connector-java" % "latest.release",
   "com.h2database" % "h2" % "1.4.187"
 )
+
+// Neo4J/Graph store dependencies
+libraryDependencies ++= Seq(
+  "com.michaelpollmeier" %% "gremlin-scala" % "3.3.0.5",
+  "com.steelbridgelabs.oss" % "neo4j-gremlin-bolt" % "0.2.27"
+)
+
+resolvers += Resolver.mavenLocal

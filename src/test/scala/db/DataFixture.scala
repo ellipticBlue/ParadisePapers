@@ -1,6 +1,6 @@
 package db
 
-import com.paradise.model.{Edge, DBNode}
+import com.paradise.model.{GraphEdge, DBNode}
 
 // Fixture providing data for DB tests
 object DataFixture {
@@ -45,9 +45,9 @@ object DataFixture {
     "e1f")
 
   val edge1 =
-    Edge(2, "cde", 3, 7)
+    GraphEdge(2, "cde", 3, 7)
 
   val edge2 =
-    Edge(4, "abc", 1, 2)
+    GraphEdge(4, "abc", 1, 2)
 }
 
