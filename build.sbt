@@ -16,3 +16,12 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-http" % "10.1.0-RC2",
   "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.0-RC2"
 )
+
+// Slick/RDBMS/MySQL dependencies
+libraryDependencies ++= Seq(
+  "com.typesafe.slick" %% "slick" % "3.2.1",
+  "org.slf4j" % "slf4j-nop" % "1.6.4",
+  "com.typesafe.slick" %% "slick-hikaricp" % "3.2.1",
+  "mysql" % "mysql-connector-java" % "latest.release",
+  "com.h2database" % "h2" % "1.4.187"
+)
